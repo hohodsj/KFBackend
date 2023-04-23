@@ -1,13 +1,14 @@
 from flask import Flask
 from flask_smorest import Api
+from flask_cors import CORS
 
 from resources.profile import blp as ProfileBlueprint
 import logging
 
 def create_app():
-    create_app
     logging.info('/create_app')
     app = Flask(__name__)
+    CORS(app)
     app.config["API_TITLE"] = "KF Endpoints API"
     app.config["API_VERSION"] = "v1"
     app.config["OPENAPI_VERSION"] = "3.0.3"
