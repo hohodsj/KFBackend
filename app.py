@@ -5,6 +5,7 @@ from resources.profile import blp as ProfileBlueprint
 import logging
 
 def create_app():
+    create_app
     logging.info('/create_app')
     app = Flask(__name__)
     app.config["API_TITLE"] = "KF Endpoints API"
