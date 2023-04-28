@@ -3,6 +3,7 @@ from flask_smorest import Api
 from flask_cors import CORS
 
 from resources.profile import blp as ProfileBlueprint
+from resources.qna import blp as QuestionAnswerBlueprint
 import logging
 
 def create_app():
@@ -18,6 +19,7 @@ def create_app():
 
     api = Api(app)
     api.register_blueprint(ProfileBlueprint)
+    api.register_blueprint(QuestionAnswerBlueprint)
     return app
 
 
