@@ -53,14 +53,4 @@ class QuestionsAnswers(MethodView):
             abort(500, message="SQLAlchemyError: {e}")
         return qna_obj
 
-    @blp.arguments(QNASchema)
-    @blp.response(201, QNASchema)
-    def put(self, qna_data):
-        print(f'put(update) {qna_data=}')
-        qna = QnaModel.query.get(qna_data.id)
-        if qna:
-            qna.question = qna_data["question"]
-            qna.answer = qna_data["answer"]
-            qna.hint = qna_data["hint"]
-
     
