@@ -1,0 +1,1 @@
+from models.qna import QnaModel

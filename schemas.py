@@ -4,9 +4,11 @@ class ProfileSchema(Schema):
     name = fields.Str()
     about = fields.Str()
 
-
-class QNASchema(Schema):
-    id = fields.Int(required=True)
+class QuestionHint(Schema): # UI
+    id = fields.Int()
     question = fields.Str(required=True)
-    answer = fields.Str()
     hint = fields.Str()
+
+class QNASchema(QuestionHint): # Admin
+    answer = fields.Str()
+
