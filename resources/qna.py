@@ -51,5 +51,18 @@ class QuestionsAnswers(MethodView):
         except SQLAlchemyError as e:
             abort(500, message="SQLAlchemyError: {e}")
         return qna_obj
+    
+    @blp.arguments(QNASchema)
+    @blp.response(201)
+    def delete(self, qna_data):
+        qna_obj = QnaModel.query.get_or_404(qna_data["id"])
+        try:
+            db.session.delete(qna_obj)
+            db.session.commit()
+        except IntegrityError as e:
+            abort(400, message="IntegrityError: {e}")
+        except SQLAlchemyError as e:
+            abort(500, message="SQLAlchemyError: {e}")
+        return {'delete': True}
 
     
