@@ -23,9 +23,9 @@ class Questions(MethodView):
             elif qna_obj and qna_data["answer"] != qna_obj.answer:
                 print(f'Input {qna_data["answer"]} is not {qna_obj.answer}')
             else:
-                print(f'{qna_data=} does not exists in db')
+                print(f'{qna_data} does not exists in db')
         else:
-            print(f'{qna_data=} id field is missing')
+            print(f'{qna_data} id field is missing')
         return {'verified': False}
 
 @blp.route("/questions-answers")
