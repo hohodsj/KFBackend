@@ -5,6 +5,8 @@ from flask_cors import CORS
 from resources.profile import blp as ProfileBlueprint
 from resources.qna import blp as QuestionAnswerBlueprint
 import logging
+from db import db
+import os
 
 def create_app():
     logging.info('/create_app')
@@ -16,6 +18,12 @@ def create_app():
     app.config["OPENAPI_URL_PREFIX"] = "/"
     app.config["OPENAPI_SWAGGER_UI_PATH"] = "/swagger-ui"
     app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL" ,"sqlite:///data.db")
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    db.init_app(app)
+    with app.app_context():
+        # create table if they don't exists
+        db.create_all()
 
     api = Api(app)
     api.register_blueprint(ProfileBlueprint)
