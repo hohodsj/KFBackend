@@ -37,7 +37,6 @@ class QuestionsAnswers(MethodView):
     @blp.arguments(QNASchema)
     @blp.response(201, QNASchema)
     def post(self, qna_data):
-        print(f'upsert: {qna_data=}')
         qna_obj = QnaModel.query.get(qna_data["id"]) if "id" in qna_data else QnaModel(**qna_data)
         if qna_obj:
             print('update')
