@@ -12,3 +12,7 @@ class QuestionHint(Schema): # UI
 class QNASchema(QuestionHint): # Admin
     answer = fields.Str()
 
+class ImageSchema(Schema):
+    id = fields.Int()
+    name = fields.Str()
+    url = fields.Str()
