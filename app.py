@@ -4,6 +4,7 @@ from flask_cors import CORS
 
 from resources.profile import blp as ProfileBlueprint
 from resources.qna import blp as QuestionAnswerBlueprint
+from resources.image import blp as ImageBlueprint
 import logging
 from db import db
 import os
@@ -28,6 +29,7 @@ def create_app():
     api = Api(app)
     api.register_blueprint(ProfileBlueprint)
     api.register_blueprint(QuestionAnswerBlueprint)
+    api.register_blueprint(ImageBlueprint)
     return app
 
 
