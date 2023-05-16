@@ -9,6 +9,20 @@ import logging
 from db import db
 import os
 
+import time
+import atexit
+from apscheduler.schedulers.background import BackgroundScheduler
+import requests
+
+def print_date_time():
+    content = requests.get('https://kfbackend.onrender.com/questions').content
+    print(f'{content=}')
+
+
+scheduler = BackgroundScheduler()
+scheduler.add_job(func=print_date_time, trigger="interval", seconds=21600)
+scheduler.start()
+
 def create_app():
     logging.info('/create_app')
     app = Flask(__name__)
