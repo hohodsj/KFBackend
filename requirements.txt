@@ -8,3 +8,5 @@ marshmallow
 sqlalchemy
 flask-sqlalchemy
 psycopg2-binary
+APScheduler
+requests
