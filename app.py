@@ -16,7 +16,7 @@ import requests
 
 def print_date_time():
     content = requests.get('https://kfbackend.onrender.com/questions').content
-    print(f'{content=}')
+    print(f'{content}')
 
 
 scheduler = BackgroundScheduler()
