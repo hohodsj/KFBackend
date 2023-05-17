@@ -20,7 +20,7 @@ def print_date_time():
 
 
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=print_date_time, trigger="interval", seconds=21600)
+scheduler.add_job(func=print_date_time, trigger="interval", seconds=1800)
 scheduler.start()
 
 def create_app():
