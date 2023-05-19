@@ -12,7 +12,7 @@ blp = Blueprint("QNA", __name__, description="QuestionAndAnswers")
 class Questions(MethodView):
     @blp.response(200, QNASchema(many=True))
     def get(self):
-        return QnaModel.query.with_entities(QnaModel.id, QnaModel.question, QnaModel.hint)
+        return QnaModel.query.order_by(QnaModel.id).with_entities(QnaModel.id, QnaModel.question, QnaModel.hint).order_by(QnaModel.id)
     
     @blp.arguments(QNASchema)
     def post(self, qna_data):
@@ -32,7 +32,7 @@ class Questions(MethodView):
 class QuestionsAnswers(MethodView):
     @blp.response(200, QNASchema(many=True))
     def get(self):
-        return QnaModel.query.all()
+        return QnaModel.query.order_by(QnaModel.id).all()
     
     @blp.arguments(QNASchema)
     @blp.response(201, QNASchema)
