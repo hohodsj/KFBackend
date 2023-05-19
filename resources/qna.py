@@ -18,7 +18,7 @@ class Questions(MethodView):
     def post(self, qna_data):
         if "id" in qna_data:
             qna_obj = QnaModel.query.get(qna_data["id"])
-            if qna_obj and qna_data["answer"] == qna_obj.answer:
+            if qna_obj and qna_data["answer"].lower().replace(" ","") == qna_obj.answer.lower().replace(" ",""):
                 return {'verified':True}
             elif qna_obj and qna_data["answer"] != qna_obj.answer:
                 print(f'Input {qna_data["answer"]} is not {qna_obj.answer}')
