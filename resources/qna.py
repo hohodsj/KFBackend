@@ -11,6 +11,12 @@ import os
 blp = Blueprint("QNA", __name__, description="QuestionAndAnswers")
 
 def send_email(to, subject, body):
+    to = []
+    user1_email = os.getenv("USER1_EMAIL")
+    if user1_email:
+        to.append(user1_email)
+    if os.getenv("USER2_EMAIL"):
+        to.append(os.getenv("USER2_EMAIL"))
     domain = os.getenv("MAILGUN_DOMAIN")
     api = os.getenv("MAILGUN_API_KEY")
     print(f'domain:{domain}  api:{api} subject:{subject} body:{body}')
@@ -32,13 +38,7 @@ class Questions(MethodView):
     
     @blp.arguments(QNASchema)
     def post(self, qna_data):
-        to = []
-        user1_email = os.getenv("USER1_EMAIL")
-        print(user1_email)
-        if user1_email:
-            to.append(user1_email)
-        if os.getenv("USER2_EMAIL"):
-            to.append(os.getenv("USER2_EMAIL"))
+        
         if "id" in qna_data:
             qna_obj = QnaModel.query.get(qna_data["id"])
             if qna_obj and qna_data["answer"].lower().replace(" ","") == qna_obj.answer.lower().replace(" ",""):
