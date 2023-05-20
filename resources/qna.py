@@ -10,7 +10,7 @@ import os
 
 blp = Blueprint("QNA", __name__, description="QuestionAndAnswers")
 
-def send_email(to, subject, body):
+def send_email(subject, body):
     to = []
     user1_email = os.getenv("USER1_EMAIL")
     if user1_email:
@@ -38,18 +38,17 @@ class Questions(MethodView):
     
     @blp.arguments(QNASchema)
     def post(self, qna_data):
-        
         if "id" in qna_data:
             qna_obj = QnaModel.query.get(qna_data["id"])
             if qna_obj and qna_data["answer"].lower().replace(" ","") == qna_obj.answer.lower().replace(" ",""):
                 subject = f'Question {qna_obj.id} PASS'
                 body = f'Kathleen answer "{qna_data["answer"]}" match actual answer "{qna_obj.answer}"'
-                send_email(to, subject, body)
+                send_email(subject, body)
                 return {'verified':True}
             elif qna_obj and qna_data["answer"] != qna_obj.answer:
                 subject = f'Question {qna_obj.id} FAIL'
                 body = f'Kathleen answer "{qna_data["answer"]}" NOT match actual answer "{qna_obj.answer}"'
-                send_email(to, subject, body)
+                send_email(subject, body)
                 print(f'Input {qna_data["answer"]} is not {qna_obj.answer}')
             else:
                 print(f'{qna_data} does not exists in db')
