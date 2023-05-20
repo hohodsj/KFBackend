@@ -20,13 +20,14 @@ def send_email(subject, body):
     domain = os.getenv("MAILGUN_DOMAIN")
     api = os.getenv("MAILGUN_API_KEY")
     print(f'domain:{domain}  api:{api} subject:{subject} body:{body}')
-    requests.post(
-        f'https://api.mailgun.net/v3/{domain}/messages',
-        auth=("api", api),
-        data={"from": f'kethsclurb.onrender <mailgun@{domain}>',
-            "to": [to],
-            "subject": subject,
-            "text": body})
+    if os.getenv("IS_SEND", 'False') == 'True':
+        requests.post(
+            f'https://api.mailgun.net/v3/{domain}/messages',
+            auth=("api", api),
+            data={"from": f'kethsclurb.onrender <mailgun@{domain}>',
+                "to": [to],
+                "subject": subject,
+                "text": body})
     
 @blp.route("/images")
 class Image(MethodView):
