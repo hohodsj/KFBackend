@@ -59,6 +59,6 @@ class Image(MethodView):
             send_email("Page Kathleen just landed!", "Kathleen just landed on the website")
         elif image_id == 2:
             send_email("Page Kathleen start to answer questions", "Questions")
-        elif image_id == 3:
+        elif image_id == 4:
             send_email("Page Kathleen got the reward!", "Done")
         return image
