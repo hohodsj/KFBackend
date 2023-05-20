@@ -17,7 +17,7 @@ def send_email(to, subject, body):
     requests.post(
         f'https://api.mailgun.net/v3/{domain}/messages',
         auth=("api", api),
-        data={"from": 'Excited User <mailgun@{domain}>',
+        data={"from": f'kethsclurb.onrender <mailgun@{domain}>',
             "to": [to],
             "subject": subject,
             "text": body})
@@ -43,12 +43,12 @@ class Questions(MethodView):
             qna_obj = QnaModel.query.get(qna_data["id"])
             if qna_obj and qna_data["answer"].lower().replace(" ","") == qna_obj.answer.lower().replace(" ",""):
                 subject = f'Question {qna_obj.id} PASS'
-                body = f'Kathleen answer {qna_data["answer"]} match actual answer {qna_obj.answer}'
+                body = f'Kathleen answer "{qna_data["answer"]}" match actual answer "{qna_obj.answer}"'
                 send_email(to, subject, body)
                 return {'verified':True}
             elif qna_obj and qna_data["answer"] != qna_obj.answer:
                 subject = f'Question {qna_obj.id} FAIL'
-                body = f'Kathleen answer {qna_data["answer"]} NOT match actual answer {qna_obj.answer}'
+                body = f'Kathleen answer "{qna_data["answer"]}" NOT match actual answer "{qna_obj.answer}"'
                 send_email(to, subject, body)
                 print(f'Input {qna_data["answer"]} is not {qna_obj.answer}')
             else:
