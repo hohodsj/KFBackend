@@ -76,9 +76,9 @@ class QuestionsAnswers(MethodView):
             db.session.add(qna_obj)
             db.session.commit()
         except IntegrityError as e:
-            abort(400, message="IntegrityError: {e}")
+            abort(400, message=f"IntegrityError: {e}")
         except SQLAlchemyError as e:
-            abort(500, message="SQLAlchemyError: {e}")
+            abort(500, message=f"SQLAlchemyError: {e}")
         return qna_obj
     
     @blp.arguments(QNASchema)
@@ -89,9 +89,9 @@ class QuestionsAnswers(MethodView):
             db.session.delete(qna_obj)
             db.session.commit()
         except IntegrityError as e:
-            abort(400, message="IntegrityError: {e}")
+            abort(400, message=f"IntegrityError: {e}")
         except SQLAlchemyError as e:
-            abort(500, message="SQLAlchemyError: {e}")
+            abort(500, message=f"SQLAlchemyError: {e}")
         return {'delete': True}
 
     

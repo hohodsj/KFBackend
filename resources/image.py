@@ -42,9 +42,9 @@ class Image(MethodView):
             db.session.add(image_obj)
             db.session.commit()
         except IntegrityError:
-            abort(409, message="Image already exists")
+            abort(409, message=f"Image already exists")
         except SQLAlchemyError:
-            abort(500, message="An error occurred while inserting the image")
+            abort(500, message=f"An error occurred while inserting the image")
         return image_obj
     
     @blp.response(200, ImageSchema(many=True))
